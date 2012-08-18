@@ -1,0 +1,16 @@
+ipython
+ipdb
+
+Django==1.4
+django-extensions==0.8
+django-debug-toolbar
+Werkzeug
+
+requests
+simplejson
+PIL
+
+python-mysql
+pymongo
+python-memcached
+redis
