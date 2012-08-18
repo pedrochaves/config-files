@@ -8,19 +8,15 @@ BASE_DIR=$HOME/workspace
 NODE_DIR=$BASE_DIR/node
 NPM_DIR=$BASE_DIR/npm
 
-apt-get install g++
+# Cloning Node and NPM repositories from git
+git clone git://github.com/joyent/node.git $NODE_DIR
+git clone git://github.com/isaacs/npm.git $NPM_DIR
 
-cd $BASE_DIR
-
-# Baixando repositorios
-git clone git://github.com/joyent/node.git
-git clone git://github.com/isaacs/npm.git
-
-# Instalação do node
-cd $NODE_DIR && ./configure && make && make install
-# Instalação do npm
-cd $NPM_DIR && make install
-# Instalando pacotes do npm
+# Installing node
+cd $NODE_DIR && ./configure && make && make install && \
+# Installing npm
+cd $NPM_DIR && make install && \
+# Instalando node's packages
 npm install -g grunt
 
 
