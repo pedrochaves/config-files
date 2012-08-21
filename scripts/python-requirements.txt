@@ -9,6 +9,7 @@ Werkzeug
 requests
 simplejson
 PIL
+pyvows
 
 python-mysql
 pymongo
