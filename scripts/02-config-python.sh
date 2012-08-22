@@ -5,7 +5,7 @@
 # Since: 18/08/2012
 
 # Installing pip and pyvows dependencies
-apt-get install -y python-pip libxslt-dev libxml2-dev && \
+apt-get install -y python-pip libxslt-dev libxml2-dev libevent-dev && \
 # Dependencies for python MySQLdb lib
 apt-get build-dep python-mysqldb && \
 # And finally, the libs :)
