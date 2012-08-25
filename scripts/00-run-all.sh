@@ -6,4 +6,5 @@
 
 ./01-config-env.sh && \
 ./02-config-python.sh && \
-./03-config-node.sh
+./03-config-node.sh && \
+./04-config-gnome3.sh
