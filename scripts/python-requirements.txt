@@ -15,3 +15,5 @@ mysql-python
 pymongo
 python-memcached
 redis
+
+BeautifulSoup
