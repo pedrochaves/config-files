@@ -4,12 +4,16 @@ ipdb
 Django==1.4
 django-extensions==0.8
 django-debug-toolbar
+django-jenkins
 Werkzeug
+oauth2
 
 requests
 simplejson
 PIL
+
 pyvows
+selenose
 
 mysql-python
 pymongo
@@ -17,3 +21,5 @@ python-memcached
 redis
 
 BeautifulSoup
+pep8
+lxml
