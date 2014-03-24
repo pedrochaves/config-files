@@ -115,11 +115,6 @@ fi
 #
 
 
-# Colors definition
-BROWN="\e[1;33m";
-BLUE="\e[1;34m";
-GRAY="\e[1;30m";
-END_COLOR="\e[0m";
 
 # Exports the default editor to GNU VIM
 export EDITOR=/usr/bin/vim
@@ -127,20 +122,34 @@ export EDITOR=/usr/bin/vim
 # Run the alias file if it exists
 test -s ~/.alias && . ~/.alias || true
 
-# Bash file that defines the function to verify a git branch directory
-function parse_git() {
-  local DIRTY STATUS
-  STATUS=$(git status --porcelain 2>/dev/null)
-  [ $? -eq 128 ] && return
-  [ -z "$(echo "$STATUS" | grep -e '^ M')"    ] || DIRTY="*"
-  [ -z "$(echo "$STATUS" | grep -e '^[MDA]')" ] || DIRTY="${DIRTY}+"
-  [ -z "$(git stash list)" ]                    || DIRTY="${DIRTY}^"
-  echo "($(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* //')$DIRTY)"
-}
+# Colors definition
+BLACK="\e[30m"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+CYAN="\e[36m"
+WHITE="\e[37m"
+END_COLOR="\e[0m"
 
 # Resets standard input parameters to reasonable values
 stty sane
 
-# Changes the default interactive prompt
-PS1="\[$BROWN\]\u@\h:\[$BLUE\]\w \[$GRAY\]\$(parse_git)\[$BROWN\]$ \[$END_COLOR\]"
+# Bash file that defines the function to verify a git branch directory
+function parse_git() {
+  local DIRTY STATUS CUR_BRANCH
 
+  STATUS=$(git status --porcelain 2>/dev/null)
+  CUR_BRANCH=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* //')
+
+  [ $? -eq 128 ] && return
+  [ -z "$(echo "$STATUS" | grep -e '^ M')"    ] || DIRTY="*"
+  [ -z "$(echo "$STATUS" | grep -e '^[MDA]')" ] || DIRTY="${DIRTY}+"
+  [ -z "$(git stash list 2>/dev/null)" ]        || DIRTY="${DIRTY}^"
+
+  echo $CUR_BRANCH
+}
+
+# Changes the default interactive prompt
+PS1="\[$GREEN\]\u@\h\[$END_COLOR\]:\w \[$CYAN\]$(parse_git)\[$END_COLOR\]\n$ "
